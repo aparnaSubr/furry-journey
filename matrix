@@ -1,0 +1,48 @@
+###############################################################################
+# Given a mxn matrix of 1s and 0s; set the element's row and column to zero
+# if the element is 0. Optimize to use lowest possible memory.
+###############################################################################
+
+void Solution::setZeroes(vector<vector<int> > &A) 
+{
+    bool row=false,col=false;
+    for(int i=0;i<A.size();i++) //rows
+    {
+        for(int j=0;j<A[i].size();j++)  //column
+        {
+            if(i==0&&A[i][j]==0)
+                row=true;
+            if(j==0&&A[i][j]==0)
+                col=true;
+            
+            if(A[i][j]==0)
+            {
+                A[0][j]=0;
+                A[i][0]=0;
+            }
+        }
+    }
+    
+    for(int i=1;i<A.size();i++) //rows
+    {
+        if(A[i][0]==0)
+            for(int j=0;j<A[i].size();j++)
+                A[i][j]=0;
+    }
+    for(int j=1;j<A[0].size();j++) //rows
+    {
+        if(A[0][j]==0)
+            for(int i=0;i<A.size();i++)
+                A[i][j]=0;
+    }
+    
+    if(row)
+        for(int i=0;i<A[0].size();i++)
+            A[0][i]=0;
+            
+    if(col)
+        for(int i=0;i<A.size();i++)
+            A[i][0]=0;
+    
+}
+
